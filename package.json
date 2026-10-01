@@ -1,0 +1,28 @@
+{
+    "name": "what-time",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "cf dev",
+        "build": "cf build",
+        "deploy": "vp build && cf deploy --prebuilt",
+        "typecheck": "cf workers types && tsc"
+    },
+    "dependencies": {
+        "@js-temporal/polyfill": "^0.5.1"
+    },
+    "devDependencies": {
+        "@cloudflare/vite-plugin": "beta",
+        "cf": "^1.0.0-beta.6",
+        "typescript": "^7.0.2",
+        "vite": "catalog:",
+        "vite-plus": "catalog:"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "12.8.1",
+            "onFail": "download"
+        }
+    }
+}

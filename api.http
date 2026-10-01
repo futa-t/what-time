@@ -1,0 +1,36 @@
+@baseUrl = http://localhost:5552
+
+### Usage
+GET {{baseUrl}}
+
+###
+GET {{baseUrl}}/1日
+### ja
+GET {{baseUrl}}/4h24m
+
+### en
+GET {{baseUrl}}/4h24m
+Accept-Language: en-US
+
+###
+GET {{baseUrl}}/500ms
+
+
+###
+GET {{baseUrl}}/250msec
+
+###
+GET {{baseUrl}}/100ミリ秒後
+
+###
+GET {{baseUrl}}/500us
+
+###
+GET {{baseUrl}}/500μs
+
+### en
+GET {{baseUrl}}/Aug 3, 2024
+# Accept-Language: en-US
+
+### en
+GET {{baseUrl}}/Aug 3
