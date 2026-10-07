@@ -6,5 +6,8 @@ export default defineConfig({
         name: "what-time",
         compatibilityDate: "2026-09-25",
         entrypoint,
+        observability: {
+            enabled: true,
+        },
     },
 })

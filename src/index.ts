@@ -191,15 +191,40 @@ function main(req: Request) {
     const result = fmtDate(calc(path, timeZone), locale)
     return response(result)
 }
+
+function logAccess(req: Request, url: URL) {
+    const cf = req.cf
+    console.log({
+        type: "access",
+        path: decodeURIComponent(url.pathname),
+        country: cf?.country,
+        city: cf?.city,
+        region: cf?.region,
+        timezone: cf?.timezone,
+        httpProtocol: cf?.httpProtocol,
+        userAgent: req.headers.get("user-agent"),
+        referer: req.headers.get("referer"),
+        acceptLanguage: req.headers.get("accept-language"),
+        ip: req.headers.get("cf-connecting-ip"),
+    })
+}
+
 export default {
     fetch(req: Request) {
+        let url = new URL(req.url)
+        if (url.pathname === "/favicon.ico") {
+            return new Response(null, {
+                status: 204,
+                headers: { "Cache-Control": "public, max-age=86400" },
+            })
+        }
+
+        logAccess(req, url)
         try {
             return main(req)
         } catch (e: any) {
             console.error(e)
             const { locale, timeZone } = getLocale(req)
-            const url = new URL(req.url)
-
             return response(usage(url.origin, timeZone, locale))
         }
     },
